@@ -1,61 +1,47 @@
 import Netflix from "../assets/netflix_logo.png";
 import Logo from "./Logo";
+import { Container, Nav, Navbar } from "react-bootstrap";
+import { Link, useLocation } from "react-router-dom";
 
-function MyNav() {
+const MyNav = () => {
+  const location = useLocation();
+  console.log("LOCATION", location);
+
   return (
-    <nav className="navbar navbar-dark bg-dark navbar-expand-lg bg-body-tertiary mb-4">
-      <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-          <Logo src={Netflix} width={"100px"} />
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <a className="nav-link active" href="#">
-                Home
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                TV Shows
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Movies
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Recently Added
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                My List
-              </a>
-            </li>
-          </ul>
-          <div className="d-flex text-white align-items-center justify-content-end">
-            <i className="bi bi-search px-2 text-secondary"></i>
-            <p className="px-2 my-0">KIDS</p>
-            <i className="bi bi-bell-fill px-2 text-secondary"></i>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <Navbar bg="light" expand="lg">
+      <Container fluid>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ms-auto">
+            <Link
+              className={`nav-link ${
+                location.pathname === "/" ? "active fw-bold" : ""
+              }`}
+              to="/"
+            >
+              Home
+            </Link>
+            <Link
+              className={`nav-link ${
+                location.pathname === "/tv-shows" ? "active fw-bold" : ""
+              }`}
+              to="/tv-shows"
+            >
+              TV Shows
+            </Link>
+            <Link
+              className={`nav-link ${
+                location.pathname === "/movie-details" ? "active fw-bold" : ""
+              }`}
+              to="/movie-details"
+            >
+              Movie
+            </Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
-}
+};
 
 export default MyNav;
